@@ -1,21 +1,23 @@
-import React, { Component } from "react";
-import { Layout } from "antd";
-import styled from "styled-components";
-import "antd/dist/antd.css";
-import { Switch, Route, Redirect } from "react-router-dom";
-import USD_BTC from "pages/USD_BTC";
-import USD_ETH from "pages/USD_ETH";
-import SideNav from "components/SideNav";
-import { connect } from "react-redux";
-import { changeCollapse } from "actions/siderActions";
+import React, { Component } from "react"
+import { Layout } from "antd"
+import styled from "styled-components"
+import "antd/dist/antd.css"
+import { Switch, Route, Redirect, withRouter } from "react-router-dom"
+import USD_BTC from "pages/USD_BTC"
+import USD_ETH from "pages/USD_ETH"
+import SideNav from "components/SideNav"
+import { connect } from "react-redux"
+import { changeCollapse } from "actions/siderActions"
+import Profile from "pages/profile"
 
-const { Content, Footer, Sider } = Layout;
-const StyledLayout = styled(Layout)`height: 100%;`;
-const StyledFooter = styled(Footer)`textAlign: center;`;
+const { Content, Footer, Sider } = Layout
+const StyledLayout = styled(Layout)`height: 100%;`
+const StyledContent = styled(Content)`margin: 16px`
+const StyledFooter = styled(Footer)`textAlign: center;`
 
 class App extends Component {
     render() {
-        const { collapsed, onCollapse } = this.props;
+        const { collapsed, onCollapse } = this.props
 
         return (
             <StyledLayout>
@@ -28,26 +30,27 @@ class App extends Component {
                 </Sider>
 
                 <Layout>
-                    <Content style={{ margin: "0 16px" }}>
+                    <StyledContent>
                         <Switch>
                             <Route path="/btc" component={USD_BTC} />
                             <Route path="/eth" component={USD_ETH} />
+                            <Route path="/profile" component={Profile} />
                             <Redirect from="/" to="/btc" exact />
                         </Switch>
-                    </Content>
+                    </StyledContent>
                     <StyledFooter>Smena school © 2017</StyledFooter>
                 </Layout>
             </StyledLayout>
-        );
+        )
     }
 }
 
 const mapStateToProps = state => ({
     collapsed: state.sider.collapsed
-});
+})
 
 const mapDispatchToProps = dispatch => ({
     onCollapse: value => dispatch(changeCollapse(value))
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

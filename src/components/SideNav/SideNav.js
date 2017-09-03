@@ -17,4 +17,11 @@ export default () =>
                 <span>Ethirium</span>
             </NavLink>
         </Menu.Item>
+
+        <Menu.Item key="3">
+            <NavLink to="/profile">
+                <Icon type="pie-chart" />
+                <span>Profile</span>
+            </NavLink>
+        </Menu.Item>
     </Menu>;
