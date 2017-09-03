@@ -1,1 +1,1 @@
-export {default as getCandles} from './getCandles'
+export { default as getCandles } from "./getCandles";

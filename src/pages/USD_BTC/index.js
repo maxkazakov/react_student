@@ -1,1 +1,1 @@
-export {default} from './USD_BTC'
+export { default } from "./USD_BTC";
