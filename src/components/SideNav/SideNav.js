@@ -1,27 +1,40 @@
-import React from "react";
-import { Menu, Icon } from "antd";
-import { NavLink } from "react-router-dom";
+import React from "react"
+import { Menu, Icon } from "antd"
+import { NavLink } from "react-router-dom"
 
-export default () =>
-    <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-        <Menu.Item key="1">
-            <NavLink to="/btc">
-                <Icon type="pie-chart" />
-                <span>Bitcoin</span>
-            </NavLink>
-        </Menu.Item>
+const menu = [
+    {
+        key: "/btc",
+        navigate_to: "/btc",
+        icon: "pie-chart",
+        caption: "Bitcoint"
+    },
+    {
+        key: "/eth",
+        navigate_to: "/eth",
+        icon: "area-chart",
+        caption: "Ethirium"
+    },
+    {
+        key: "/profile",
+        navigate_to: "/profile",
+        icon: "user",
+        caption: "Profile"
+    }
+]
 
-        <Menu.Item key="2">
-            <NavLink to="/eth">
-                <Icon type="pie-chart" />
-                <span>Ethirium</span>
-            </NavLink>
-        </Menu.Item>
-
-        <Menu.Item key="3">
-            <NavLink to="/profile">
-                <Icon type="pie-chart" />
-                <span>Profile</span>
-            </NavLink>
-        </Menu.Item>
-    </Menu>;
+export default props => {
+    const { location } = props
+    return (
+        <Menu theme="dark" defaultSelectedKeys={[location]} mode="inline">
+            {menu.map(item => (
+                <Menu.Item key={item.key}>
+                    <NavLink to={item.navigate_to}>
+                        <Icon type={item.icon} />
+                        <span>{item.caption}}</span>
+                    </NavLink>
+                </Menu.Item>
+            ))}
+        </Menu>
+    )
+}

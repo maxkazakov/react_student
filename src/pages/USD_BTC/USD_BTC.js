@@ -1,15 +1,17 @@
-import React, { Component } from "react";
-import { getCandles } from "api";
-import Chart from "components/Chart";
+import React, { Component } from "react"
+import { getCandles } from "api"
+import Chart from "components/Chart"
+
+const BTC_USD = "BTCUSD"
 
 class USD_BTC extends Component {
     state = {
         isLoading: true,
         data: []
-    };
+    }
 
     componentDidMount() {
-        getCandles().then(data => {
+        getCandles(BTC_USD).then(data => {
             this.setState({
                 isLoading: false,
                 data: data
@@ -22,16 +24,16 @@ class USD_BTC extends Component {
                         volume
                     }))
                     .reverse()
-            });
-        });
+            })
+        })
     }
     render() {
-        const { isLoading, data } = this.state;
+        const { isLoading, data } = this.state
 
-        if (isLoading) return <p>Loading...</p>;
+        if (isLoading) return <p>Loading...</p>
 
-        return <Chart data={data} />;
+        return <Chart data={data} />
     }
 }
 
-export default USD_BTC;
+export default USD_BTC

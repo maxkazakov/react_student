@@ -12,7 +12,7 @@ import Profile from "pages/profile"
 
 const { Content, Footer, Sider } = Layout
 const StyledLayout = styled(Layout)`height: 100%;`
-const StyledContent = styled(Content)`margin: 16px`
+const StyledContent = styled(Content)`margin: 16px;`
 const StyledFooter = styled(Footer)`textAlign: center;`
 
 class App extends Component {
@@ -26,7 +26,26 @@ class App extends Component {
                     collapsed={collapsed}
                     onCollapse={onCollapse}
                 >
-                    <SideNav />
+                    <Switch>
+                        <Route
+                            path="/btc"
+                            render={props => (
+                                <SideNav location={props.location.pathname} />
+                            )}
+                        />
+                        <Route
+                            path="/eth"
+                            render={props => (
+                                <SideNav location={props.location.pathname} />
+                            )}
+                        />
+                        <Route
+                            path="/profile"
+                            render={props => (
+                                <SideNav location={props.location.pathname} />
+                            )}
+                        />
+                    </Switch>
                 </Sider>
 
                 <Layout>
