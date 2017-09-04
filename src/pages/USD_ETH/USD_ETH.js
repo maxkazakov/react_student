@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { getCandles } from "api"
 import Chart from "components/Chart"
+import BuzyIndicator from "components/BuzyIndicator"
 
 const ETH_USD = "ETHUSD"
 
@@ -30,7 +31,7 @@ class USD_ETH extends Component {
     render() {
         const { isLoading, data } = this.state
 
-        if (isLoading) return <p>Loading...</p>
+        if (isLoading) return <BuzyIndicator />
 
         return <Chart data={data} />
     }

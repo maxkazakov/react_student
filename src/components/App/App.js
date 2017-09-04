@@ -12,7 +12,12 @@ import Profile from "pages/profile"
 
 const { Content, Footer, Sider } = Layout
 const StyledLayout = styled(Layout)`height: 100%;`
-const StyledContent = styled(Content)`margin: 16px;`
+const StyledContent = styled(Content)`
+    margin: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 const StyledFooter = styled(Footer)`textAlign: center;`
 
 class App extends Component {
