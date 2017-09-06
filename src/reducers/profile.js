@@ -1,27 +1,34 @@
 import {
-    CHANGE_EMAIL,
-    CHANGE_FIRSTNAME,
-    CHANGE_LASTNAME
+	changeEmail,
+	changeFirstname,
+	changeLastname
 } from "actions/profileActions"
+import { combineReducers } from "redux"
+import { handleActions } from "redux-actions"
 
-export default (state = { email: "", firstname: "", lastname: "" }, action) => {
-    switch (action.type) {
-        case CHANGE_EMAIL:
-            return {
-                ...state,
-                email: action.payload
-            }
-        case CHANGE_FIRSTNAME:
-            return {
-                ...state,
-                firstname: action.payload
-            }
-        case CHANGE_LASTNAME:
-            return {
-                ...state,
-                lastname: action.payload
-            }
-        default:
-            return state
-    }
-}
+const email = handleActions(
+	{
+		[changeEmail]: (state, action) => action.payload
+	},
+	""
+)
+
+const firstname = handleActions(
+	{
+		[changeFirstname]: (state, action) => action.payload
+	},
+	""
+)
+
+const lastName = handleActions(
+	{
+		[changeLastname]: (state, action) => action.payload
+	},
+	""
+)
+
+export default combineReducers({ email, firstname, lastName })
+
+export const getEmail = state => state.profile.email
+export const getFirstname = state => state.profile.firstname
+export const getLastname = state => state.profile.lastName
