@@ -8,20 +8,38 @@ import {
 
 const isLoading = handleActions(
 	{
-		[getCandlesRequest]: () => true,
-		[getCandlesSuccess]: () => false,
-		[getCandlesFailure]: () => false
+		[getCandlesRequest]: (state, action) => ({
+			...state,
+			[action.payload]: true
+		}),
+		[getCandlesSuccess]: (state, action) => ({
+			...state,
+			[action.meta]: false
+		}),
+		[getCandlesFailure]: (state, action) => ({
+			...state,
+			[action.meta]: false
+		})
 	},
-	false
+	{ BTCUSD: false, ETHUSD: false }
 )
 
 const isLoaded = handleActions(
 	{
-		[getCandlesRequest]: () => false,
-		[getCandlesSuccess]: () => true,
-		[getCandlesFailure]: () => true
+		[getCandlesRequest]: (state, action) => ({
+			...state,
+			[action.payload]: false
+		}),
+		[getCandlesSuccess]: (state, action) => ({
+			...state,
+			[action.meta]: true
+		}),
+		[getCandlesFailure]: (state, action) => ({
+			...state,
+			[action.meta]: true
+		})
 	},
-	false
+	{ BTCUSD: false, ETHUSD: false }
 )
 
 const error = handleActions(
@@ -54,5 +72,5 @@ export default combineReducers({
 })
 
 export const getCandles = (state, pair) => state.candles.enitites[pair]
-export const getIsLoading = state => state.candles.isLoading
-export const getIsLoaded = state => state.candles.isLoaded
+export const getIsLoading = (state, pair) => state.candles.isLoading[pair]
+export const getIsLoaded = (state, pair) => state.candles.isLoaded[pair]

@@ -1,40 +1,32 @@
 import React, { Component } from "react"
-import { getCandles } from "api"
 import Chart from "components/Chart"
 import BuzyIndicator from "components/BuzyIndicator"
+import { getCandlesRequest } from "actions/apiActions"
+import { connect } from "react-redux"
+import { getCandles, getIsLoading, getIsLoaded } from "reducers/candles.js"
 
 const ETH_USD = "ETHUSD"
 
-class USD_ETH extends Component {
-    state = {
-        isLoading: true,
-        data: []
-    }
+class USD_BTC extends Component {
+	componentDidMount() {
+		const { isLoaded } = this.props
+		if (!isLoaded) {
+			this.props.getCandlesRequest(ETH_USD)
+		}
+	}
 
-    componentDidMount() {
-        getCandles(ETH_USD).then(data => {
-            this.setState({
-                isLoading: false,
-                data: data
-                    .map(([date, open, close, high, low, volume]) => ({
-                        date,
-                        open,
-                        close,
-                        high,
-                        low,
-                        volume
-                    }))
-                    .reverse()
-            })
-        })
-    }
-    render() {
-        const { isLoading, data } = this.state
-
-        if (isLoading) return <BuzyIndicator />
-
-        return <Chart data={data} />
-    }
+	render() {
+		const { isLoaded, isLoading, data } = this.props
+		console.log(this.props)
+		if (isLoaded) return <Chart data={data} />
+		return <BuzyIndicator />
+	}
 }
 
-export default USD_ETH
+const mapStateToProps = state => ({
+	data: getCandles(state, ETH_USD),
+	isLoading: getIsLoading(state, ETH_USD),
+	isLoaded: getIsLoaded(state, ETH_USD)
+})
+
+export default connect(mapStateToProps, { getCandlesRequest })(USD_BTC)

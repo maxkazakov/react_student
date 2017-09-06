@@ -9,10 +9,12 @@ const BTC_USD = "BTCUSD"
 
 class USD_BTC extends Component {
 	componentDidMount() {
-		this.props.getCandlesRequest(BTC_USD)
+		const { isLoaded } = this.props
+		if (!isLoaded) {
+			this.props.getCandlesRequest(BTC_USD)
+		}
 	}
 
-	// componentShoukd
 	render() {
 		const { isLoaded, isLoading, data } = this.props
 		console.log(this.props)
@@ -23,8 +25,8 @@ class USD_BTC extends Component {
 
 const mapStateToProps = state => ({
 	data: getCandles(state, BTC_USD),
-	isLoading: getIsLoading(state),
-	isLoaded: getIsLoaded(state)
+	isLoading: getIsLoading(state, BTC_USD),
+	isLoaded: getIsLoaded(state, BTC_USD)
 })
 
 export default connect(mapStateToProps, { getCandlesRequest })(USD_BTC)
