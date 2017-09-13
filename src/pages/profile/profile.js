@@ -10,7 +10,7 @@ import { getEmail, getFirstname, getLastname } from "reducers/profile"
 
 import { connect } from "react-redux"
 
-class Profile extends Component {
+export class Profile extends Component {
 	componentDidMount() {
 		console.log("Profile did mount")
 	}
