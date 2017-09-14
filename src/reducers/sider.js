@@ -1,13 +1,15 @@
-import { CHANGE_COLLAPSE } from "actions/siderActions";
+import { combineReducers } from "redux"
+import { handleActions } from "redux-actions"
+import { changeCollapse } from "actions/siderActions"
 
-export default (state = { collapsed: true }, action) => {
-    switch (action.type) {
-        case CHANGE_COLLAPSE:
-            return {
-                ...state,
-                collapsed: action.payload
-            };
-        default:
-            return state;
-    }
-};
+import {} from "actions/siderActions"
+
+const isCollapsed = handleActions(
+    {
+        [changeCollapse]: (state, action) => action.payload
+    },
+    true
+)
+
+export default combineReducers({ isCollapsed })
+export const getIsCollapsed = state => state.sider.isCollapsed

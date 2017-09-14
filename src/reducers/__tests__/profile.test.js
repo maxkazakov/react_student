@@ -1,16 +1,30 @@
 import profileReducer from "../profile"
 import {
-	changeEmail,
-	changeFirstname,
-	changeLastname
+    changeEmail,
+    changeFirstname,
+    changeLastname
 } from "actions/profileActions"
 
 describe("Profile reducer", () => {
-	test("#changeEmail", () => {
-		const initState = profileReducer(undefined, {})
-
-		expect(
-			profileReducer(initState, changeEmail("test@test")).email
-		).toEqual("test@test")
-	})
+    test("reducer init value", () => {
+        expect(profileReducer(undefined, {})).toEqual({
+            email: "",
+            firstname: "",
+            lastname: ""
+        })
+    })
+    ;[
+        ["email", changeEmail],
+        ["firstname", changeFirstname],
+        ["lastname", changeLastname]
+    ].forEach(([name, actionCreator]) => {
+        test(`${name}`, () => {
+            expect(
+                profileReducer(
+                    profileReducer(undefined, {}),
+                    actionCreator("value")
+                )[name]
+            ).toEqual("value")
+        })
+    })
 })

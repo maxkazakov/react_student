@@ -4,7 +4,7 @@ import profile from "./profile"
 import candles from "./candles"
 
 export default combineReducers({
-	candles,
-	sider,
-	profile
+    candles,
+    sider,
+    profile
 })

@@ -9,6 +9,7 @@ import SideNav from "components/SideNav"
 import { connect } from "react-redux"
 import { changeCollapse } from "actions/siderActions"
 import Profile from "pages/profile"
+import { getIsCollapsed } from "reducers/sider.js"
 
 const { Content, Footer, Sider } = Layout
 const StyledLayout = styled(Layout)`height: 100%;`
@@ -22,14 +23,14 @@ const StyledFooter = styled(Footer)`textAlign: center;`
 
 class App extends Component {
     render() {
-        const { collapsed, onCollapse } = this.props
+        const { collapsed, changeCollapse } = this.props
 
         return (
             <StyledLayout>
                 <Sider
                     collapsible
                     collapsed={collapsed}
-                    onCollapse={onCollapse}
+                    onCollapse={changeCollapse}
                 >
                     <Switch>
                         <Route
@@ -70,11 +71,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    collapsed: state.sider.collapsed
+    collapsed: getIsCollapsed(state)
 })
 
-const mapDispatchToProps = dispatch => ({
-    onCollapse: value => dispatch(changeCollapse(value))
-})
+const mapDispatchToProps = {
+    changeCollapse
+}
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

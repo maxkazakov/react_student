@@ -1,6 +1,3 @@
-export const CHANGE_COLLAPSE = "CHANGE_COLLAPSE"
+import { createAction } from "redux-actions"
 
-export const changeCollapse = isCollapsed => ({
-    type: CHANGE_COLLAPSE,
-    payload: isCollapsed
-})
+export const changeCollapse = createAction("CHANGE_COLLAPSE")
