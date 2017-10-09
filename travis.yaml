@@ -7,6 +7,3 @@ cache:
 script:
   - npm run build
   - npm test
-
-after_success:
-  - echo "Yaahoo"
