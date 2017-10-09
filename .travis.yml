@@ -2,11 +2,8 @@ language: node_js
 node_js:
   - 8
 cache:
-  directories:
+  derectories:
     - node_modules
-script:
+sctript:
   - npm run build
   - npm test
-
-after_success:
-  - echo "Yaahoo"
