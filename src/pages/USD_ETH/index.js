@@ -1,1 +1,1 @@
-export {default} from './USD_ETH'
+export { default } from "./USD_ETH";
